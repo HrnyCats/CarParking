@@ -1,5 +1,6 @@
 from kivymd.app import MDApp
 
+
 import sqlite3
 
 class MainApp(MDApp):
@@ -10,10 +11,9 @@ class MainApp(MDApp):
         # Initialize GPS
 
         # Connect to database
-        self.connection = sqlite3.connect("markets.db")
+        self.connection = sqlite3.connect("Parks.db")
         self.cursor = self.connection.cursor()
 
-        # Instantiate SearchPopupMenu
 
 MainApp().run()
     

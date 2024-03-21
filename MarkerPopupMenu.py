@@ -1,4 +1,5 @@
 from kivymd.uix.bottomsheet import MDListBottomSheet
+
 class MarkerPopupMenu(MDListBottomSheet):
     def __init__(self, parkData):
         super().__init__()
@@ -7,5 +8,5 @@ class MarkerPopupMenu(MDListBottomSheet):
 
         for i in range(len(headers)):
             attributeName = headers[i]
-            attributeValue = parkData
+            attributeValue = parkData[i]
             setattr(self,attributeName,attributeValue)
