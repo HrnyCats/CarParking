@@ -3,8 +3,8 @@ from MarkerPopupMenu import MarkerPopupMenu
 
 class ParkMarker(MarkerPopupMenu):
     source = "marker.png"
-    marketData = []
+    parkData = []
 
     def on_release(self):
-        menu = MarkerPopupMenu(self.marketData)
+        menu = MarkerPopupMenu(self.parkData)
         menu.open()
