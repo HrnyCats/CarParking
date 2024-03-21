@@ -1,7 +1,7 @@
 from kivy_garden.mapview import MapMarkerPopup
 from MarkerPopupMenu import MarkerPopupMenu
 
-class ParkMarker(MarkerPopupMenu):
+class ParkMarker(MapMarkerPopup):
     source = "marker.png"
     parkData = []
 
