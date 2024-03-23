@@ -7,6 +7,7 @@ from kivy_garden.mapview import MapView
 from kivymd.app import MDApp
 from kivymd.uix.behaviors import TouchBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.bottomsheet import MDBottomSheet
 
 KV = '''
 #:import MapSource kivy_garden.mapview.MapSource
@@ -57,17 +58,7 @@ MDScreen:
                     height: "150dp"
                     on_open: asynckivy.start(app.generate_content())
 
-                    MDBottomSheetDragHandle:
-                        drag_handle_color: "grey"
-
-                        MDBottomSheetDragHandleTitle:
-                            text: "Select type map"
-                            pos_hint: {"center_y": .5}
-
-                        MDBottomSheetDragHandleButton:
-                            icon: "close"
-                            ripple_effect: False
-                            on_release: bottom_sheet.set_state("toggle")
+                   
 
                     BoxLayout:
                         id: content_container
@@ -82,11 +73,11 @@ class TypeMapElement(MDBoxLayout):
 
 
 class CustomMapView(MapView, TouchBehavior):
-    bottom_sheet = ObjectProperty()
+    bottom_sheet = MDBottomSheet
 
     def on_double_tap(self, touch, *args):
         if self.bottom_sheet:
-            self.bottom_sheet.set_state("toggle")
+            self.bottom_sheet.open()
 
 
 class Example(MDApp):

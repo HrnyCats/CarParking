@@ -1,8 +1,9 @@
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ObjectProperty, BooleanProperty
+from kivy.properties import StringProperty,ObjectProperty
 from kivymd.app import MDApp
 from ParksMapView import ParksMapView
 import sqlite3
+
 
 class MainApp(MDApp):
     connection = None
@@ -22,7 +23,7 @@ class MainApp(MDApp):
         self.cursor = self.connection.cursor()
     
     def build(self):
-        Builder.load_file("ParksMapView.kv")
+        Builder.load_file("main.kv")
         return super().build()
 
 
