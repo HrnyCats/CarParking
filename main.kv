@@ -1,0 +1,43 @@
+#:import MapSource kivy_garden.mapview.MapSource
+#:import asynckivy asynckivy
+
+MDScreen:
+
+    MDNavigationLayout:
+
+        MDScreenManager:
+
+            MDScreen:
+            
+                ParksMapView:
+                    bottom_sheet: bottom_sheet
+                    map_source: MapSource(url=app.map_sources[app.current_map])
+                    lat: 53.3
+                    lon: 58.9
+                    zoom: 10
+                    on_zoom:
+                        self.zoom = 10 if self.zoom < 10 else self.zoom
+                    on_lat:
+                        self.StartGettingParksInFov()
+                    on_lon:
+                        self.StartGettingParksInFov()
+                MDBottomSheet:
+                    id: bottom_sheet
+                    sheet_type: "modal"
+                    size_hint_y: None
+                    height: "150dp"
+
+                    MDBottomSheetDragHandle:
+                        drag_handle_color: "grey"
+
+                        MDBottomSheetDragHandleTitle:
+                            text: "text"
+                            pos_hint: {"center_y": .5}
+
+                        MDBottomSheetDragHandleButton:
+                            icon: "close"
+                            ripple_effect: False
+                            on_release: bottom_sheet.dismiss(bottom_sheet)
+                    BoxLayout
+                        id: content_container
+                        padding: 0, 0, 0, "16dp"
