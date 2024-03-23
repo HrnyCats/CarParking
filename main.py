@@ -26,6 +26,4 @@ class MainApp(MDApp):
         Builder.load_file("main.kv")
         return super().build()
 
-
-MainApp().run()
-    
+main = MainApp().run()

@@ -1,10 +1,12 @@
 from kivy_garden.mapview import MapView
 from kivy.clock import Clock
 from kivy.app import App
+from kivy.uix.label import Label
 from ParkMarker import ParkMarker
 from kivymd.uix.behaviors import TouchBehavior
 from kivy.properties import StringProperty,ObjectProperty
 from kivymd.uix.bottomsheet import MDBottomSheet
+from kivymd.uix.list.list import MDList, MDListItem
 from Singleton import Singleton
 
 
@@ -48,9 +50,24 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
 
 
     def release(self, *args):
-            
+        headers = "id_car_parking,lon,lat,address,price,type_car_park,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end"
+        headers = headers.split(',')
+
+        dataPressedCarParking = args[0].parkData
+
+        listData = MDList()
+        labels = []
+        for i in range(2, len(headers)):
+            attributeName = headers[i]
+            attributeValue = dataPressedCarParking[i]
+
+            labels.append(Label(text=f"{attributeName}: {attributeValue}"))
+            labels[-1].color = (0,0,0,1)
+            listData.add_widget(MDListItem(labels[-1]))
+
+        self.bottom_sheet.add_widget(listData)
 
         if self.bottom_sheet:
-            self.bottom_sheet.open(self.bottom_sheet)
+            self.bottom_sheet.set_state("toggle")
         
 
