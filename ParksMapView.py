@@ -14,6 +14,10 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
     gettingParksTimer = None
     bottom_sheet = MDBottomSheet
     parkAdresses = []
+    flag = False
+    def __init__(self,**kwargs, ):
+        super(ParksMapView, self).__init__(**kwargs)
+        self.listData = MDList()
 
     def StartGettingParksInFov(self):
         # Каждую секунду, получаем маркеты в поле зрении
@@ -30,7 +34,6 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
         sqlStatement = "Select * FROM Parks WHERE lon > %s AND lon < %s AND lat > %s AND lat < %s "%(minLon, maxLon, minLat, maxLat)
         app.cursor.execute(sqlStatement)
         parks = app.cursor.fetchall()
-        print(parks)
         for park in parks:
             adress = park[3]
             if adress in self.parkAdresses:
@@ -50,12 +53,18 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
 
 
     def release(self, *args):
+        if not self.flag:
+            self.bottom_sheet.add_widget(self.listData)
+            self.flag = True
+        else:
+            self.listData.clear_widgets()
+
         headers = "id_car_parking,lon,lat,address,price,type_car_park,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end"
         headers = headers.split(',')
 
         dataPressedCarParking = args[0].parkData
 
-        listData = MDList()
+        #self.listData.size_hint = 1, 1
         labels = []
         for i in range(2, len(headers)):
             attributeName = headers[i]
@@ -63,9 +72,11 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
 
             labels.append(Label(text=f"{attributeName}: {attributeValue}"))
             labels[-1].color = (0,0,0,1)
-            listData.add_widget(MDListItem(labels[-1]))
-
-        self.bottom_sheet.add_widget(listData)
+            listitem = MDListItem(labels[-1])
+            # listitem.spacing = 0
+            listitem.size_hint = 1, None
+            listitem.height = self.bottom_sheet.height / len(headers)
+            self.listData.add_widget(listitem)
 
         if self.bottom_sheet:
             self.bottom_sheet.set_state("toggle")

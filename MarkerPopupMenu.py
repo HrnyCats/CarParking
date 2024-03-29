@@ -6,6 +6,7 @@ class MarkerPopupMenu():
 
        
     def ShowParkData(parkData):
+        #заброшенный метод
         headers = "id_car_parking,lon,lat,address,price,type_car_park,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end"
         headers = headers.split(',')
 

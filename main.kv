@@ -8,7 +8,7 @@ MDScreen:
         MDScreenManager:
 
             MDScreen:
-            
+
                 ParksMapView:
                     bottom_sheet: bottom_sheet
                     map_source: MapSource(url=app.map_sources[app.current_map])
@@ -24,8 +24,7 @@ MDScreen:
                 MDBottomSheet:
                     id: bottom_sheet
                     sheet_type: "modal"
-                    size_hint_y: None
-                    height: "150dp"
+                    size_hint_y: 0.8
 
                     MDBottomSheetDragHandle:
                         drag_handle_color: "grey"
@@ -41,3 +40,5 @@ MDScreen:
                     BoxLayout
                         id: content_container
                         padding: 0, 0, 0, "16dp"
+
+

@@ -4,7 +4,7 @@ from MarkerPopupMenu import MarkerPopupMenu
 
 class ParkMarker(MapMarkerPopup):
     source = "marker.png"
-    parkData = []
+    # parkData = []
 
     def on_release(self):
         MarkerPopupMenu.ShowParkData(self.parkData)
