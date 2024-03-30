@@ -2,13 +2,22 @@
 #:import asynckivy asynckivy
 
 MDScreen:
-
+    
     MDNavigationLayout:
 
         MDScreenManager:
 
             MDScreen:
+                
+                MDButton:
+                    style: "elevated"
+                    pos_hint: {"center_x": .5, "center_y": .5}
 
+                    MDButtonIcon:
+                        icon: "plus"
+
+                    MDButtonText:
+                        text: "Elevated"
                 ParksMapView:
                     bottom_sheet: bottom_sheet
                     map_source: MapSource(url=app.map_sources[app.current_map])
@@ -25,6 +34,8 @@ MDScreen:
                     id: bottom_sheet
                     sheet_type: "modal"
                     size_hint_y: 0.8
+                    orientation: "vertical"
+                    md_bg_color: app.theme_cls.surfaceColor
 
                     MDBottomSheetDragHandle:
                         drag_handle_color: "grey"
@@ -40,5 +51,20 @@ MDScreen:
                     BoxLayout
                         id: content_container
                         padding: 0, 0, 0, "16dp"
+                   
+                    MDButton:
+                        style: "elevated"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        theme_bg_color: "Custom"
+                        md_bg_color: "#EDF1F9"
+                        icon_color: "white"
+                        MDButtonIcon:
+                            icon: "plus"
+
+                        MDButtonText:
+                            text: "Elevated"
+                            theme_text_color: "Custom"
+                            text_color: "red"
+                            
 
 

@@ -2,6 +2,8 @@ from kivy_garden.mapview import MapView
 from kivy.clock import Clock
 from kivy.app import App
 from kivy.uix.label import Label
+from kivymd.uix.button import MDButton, MDButtonText
+from kivymd.uix.boxlayout import MDBoxLayout
 from ParkMarker import ParkMarker
 from kivymd.uix.behaviors import TouchBehavior
 from kivy.properties import StringProperty,ObjectProperty
@@ -15,9 +17,24 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
     bottom_sheet = MDBottomSheet
     parkAdresses = []
     flag = False
+
     def __init__(self,**kwargs, ):
         super(ParksMapView, self).__init__(**kwargs)
+        #self.buildBottomSheet()
+
+    def buildBottomSheet(self):
+        self.bottom_sheetLayout = MDBoxLayout(orientation="vertical")
         self.listData = MDList()
+        self.bottom_sheetLayout.add_widget(self.listData)
+
+        buttonBox = MDBoxLayout()
+        buttomReservation = MDButton(MDButtonText(text="Бронировать"))
+        buttonBox.add_widget(buttomReservation)
+        buttomPay = MDButton(MDButtonText(text="Оплата"), md_bg_color="Green")
+        buttonBox.add_widget(buttomPay)
+        self.bottom_sheetLayout.add_widget(buttonBox)
+
+
 
     def StartGettingParksInFov(self):
         # Каждую секунду, получаем маркеты в поле зрении
@@ -51,10 +68,13 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
         adress = park[3]
         self.parkAdresses.append(adress)
 
-
     def release(self, *args):
+        
+        if self.bottom_sheet:
+            self.bottom_sheet.set_state("toggle")
+        return
         if not self.flag:
-            self.bottom_sheet.add_widget(self.listData)
+            #self.bottom_sheet.add_widget(self.bottom_sheetLayout)
             self.flag = True
         else:
             self.listData.clear_widgets()
@@ -78,7 +98,5 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
             listitem.height = self.bottom_sheet.height / len(headers)
             self.listData.add_widget(listitem)
 
-        if self.bottom_sheet:
-            self.bottom_sheet.set_state("toggle")
         
 

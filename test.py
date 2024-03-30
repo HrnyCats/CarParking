@@ -1,119 +1,26 @@
-import asynckivy
-
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ObjectProperty, BooleanProperty
-from kivy_garden.mapview import MapView
 
 from kivymd.app import MDApp
-from kivymd.uix.behaviors import TouchBehavior
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.bottomsheet import MDBottomSheet
 
 KV = '''
-#:import MapSource kivy_garden.mapview.MapSource
-#:import asynckivy asynckivy
-
-
-<TypeMapElement>
-    orientation: "vertical"
-    adaptive_height: True
-    spacing: "8dp"
-
-    MDIconButton:
-        id: icon
-        icon: root.icon
-        theme_bg_color: "Custom"
-        md_bg_color: "#EDF1F9" if not root.selected else app.theme_cls.primaryColor
-        pos_hint: {"center_x": .5}
-        theme_icon_color: "Custom"
-        icon_color: "white" if root.selected else "black"
-        on_release: app.set_active_element(root, root.title.lower())
-
-    MDLabel:
-        text: root.title
-        pos_hint: {"center_x": .5}
-        halign: "center"
-        adaptive_height: True
-
-
 MDScreen:
+    md_bg_color: app.theme_cls.surfaceColor
 
-    MDNavigationLayout:
+    MDButton:
+        style: "elevated"
+        pos_hint: {"center_x": .5, "center_y": .5}
 
-        MDScreenManager:
+        MDButtonIcon:
+            icon: "plus"
 
-            MDScreen:
-
-                CustomMapView:
-                    bottom_sheet: bottom_sheet
-                    map_source: MapSource(url=app.map_sources[app.current_map])
-                    lat: 53.3
-                    lon: 58.9
-                    zoom: 12
-
-                MDBottomSheet:
-                    id: bottom_sheet
-                    sheet_type: "standard"
-                    size_hint_y: None
-                    height: "150dp"
-                    on_open: asynckivy.start(app.generate_content())
-
-                   
-
-                    BoxLayout:
-                        id: content_container
-                        padding: 0, 0, 0, "16dp"
+        MDButtonText:
+            text: "Elevated"
 '''
 
 
-class TypeMapElement(MDBoxLayout):
-    selected = BooleanProperty(False)
-    icon = StringProperty()
-    title = StringProperty()
-
-
-class CustomMapView(MapView, TouchBehavior):
-    bottom_sheet = MDBottomSheet
-
-    def on_double_tap(self, touch, *args):
-        if self.bottom_sheet:
-            self.bottom_sheet.open()
-
-
 class Example(MDApp):
-    map_sources = {
-        "street": "https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-        "sputnik": "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-        "hybrid": "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
-    }
-    current_map = StringProperty("street")
-
-    async def generate_content(self):
-        icons = {
-            "street": "google-street-view",
-            "sputnik": "space-station",
-            "hybrid": "map-legend",
-        }
-        if not self.root.ids.content_container.children:
-            for i, title in enumerate(self.map_sources.keys()):
-                await asynckivy.sleep(0)
-                self.root.ids.content_container.add_widget(
-                    TypeMapElement(
-                        title=title.capitalize(),
-                        icon=icons[title],
-                        selected=not i,
-                    )
-                )
-
-    def set_active_element(self, instance, type_map):
-        for element in self.root.ids.content_container.children:
-            if instance == element:
-                element.selected = True
-                self.current_map = type_map
-            else:
-                element.selected = False
-
     def build(self):
+        self.theme_cls.primary_palette = "Green"
         return Builder.load_string(KV)
 
 

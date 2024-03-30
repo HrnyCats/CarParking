@@ -23,6 +23,7 @@ class MainApp(MDApp):
         self.cursor = self.connection.cursor()
     
     def build(self):
+        self.theme_cls.primary_palette = "Green"
         Builder.load_file("main.kv")
         return super().build()
 
