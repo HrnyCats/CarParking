@@ -7,6 +7,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from ParkMarker import ParkMarker
 from kivymd.uix.behaviors import TouchBehavior
 from kivy.properties import StringProperty,ObjectProperty
+from BottomSheet import BottomSheet
 from kivymd.uix.bottomsheet import MDBottomSheet
 from kivymd.uix.list.list import MDList, MDListItem
 from Singleton import Singleton
@@ -14,7 +15,7 @@ from Singleton import Singleton
 
 class ParksMapView(MapView, TouchBehavior, Singleton):
     gettingParksTimer = None
-    bottom_sheet = MDBottomSheet
+    bottom_sheet = BottomSheet
     parkAdresses = []
     flag = False
 
@@ -22,17 +23,17 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
         super(ParksMapView, self).__init__(**kwargs)
         #self.buildBottomSheet()
 
-    def buildBottomSheet(self):
-        self.bottom_sheetLayout = MDBoxLayout(orientation="vertical")
-        self.listData = MDList()
-        self.bottom_sheetLayout.add_widget(self.listData)
-
-        buttonBox = MDBoxLayout()
-        buttomReservation = MDButton(MDButtonText(text="Бронировать"))
-        buttonBox.add_widget(buttomReservation)
-        buttomPay = MDButton(MDButtonText(text="Оплата"), md_bg_color="Green")
-        buttonBox.add_widget(buttomPay)
-        self.bottom_sheetLayout.add_widget(buttonBox)
+    # def buildBottomSheet(self):
+    #     self.bottom_sheetLayout = MDBoxLayout(orientation="vertical")
+    #     self.listData = MDList()
+    #     self.bottom_sheetLayout.add_widget(self.listData)
+    #
+    #     buttonBox = MDBoxLayout()
+    #     buttomReservation = MDButton(MDButtonText(text="Бронировать"))
+    #     buttonBox.add_widget(buttomReservation)
+    #     buttomPay = MDButton(MDButtonText(text="Оплата"), md_bg_color="Green")
+    #     buttonBox.add_widget(buttomPay)
+    #     self.bottom_sheetLayout.add_widget(buttonBox)
 
 
 
@@ -69,15 +70,10 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
         self.parkAdresses.append(adress)
 
     def release(self, *args):
-        
-        if self.bottom_sheet:
-            self.bottom_sheet.set_state("toggle")
-        return
-        if not self.flag:
-            #self.bottom_sheet.add_widget(self.bottom_sheetLayout)
-            self.flag = True
-        else:
-            self.listData.clear_widgets()
+        # if self.bottom_sheet:
+        #     self.bottom_sheet.set_state("toggle")
+        # return
+        self.bottom_sheet.link_list.clear_widgets()
 
         headers = "id_car_parking,lon,lat,address,price,type_car_park,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end"
         headers = headers.split(',')
@@ -96,7 +92,10 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
             # listitem.spacing = 0
             listitem.size_hint = 1, None
             listitem.height = self.bottom_sheet.height / len(headers)
-            self.listData.add_widget(listitem)
+            self.bottom_sheet.link_list.add_widget(listitem)
+
+        if self.bottom_sheet:
+            self.bottom_sheet.set_state("toggle")
 
         
 

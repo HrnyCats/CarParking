@@ -2,6 +2,7 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty,ObjectProperty
 from kivymd.app import MDApp
 from ParksMapView import ParksMapView
+from BottomSheet import BottomSheet
 import sqlite3
 
 

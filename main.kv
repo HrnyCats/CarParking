@@ -30,8 +30,10 @@ MDScreen:
                         self.StartGettingParksInFov()
                     on_lon:
                         self.StartGettingParksInFov()
-                MDBottomSheet:
+                BottomSheet:
                     id: bottom_sheet
+                    link_button: buttonReservation
+                    link_list: listBottomSheet
                     sheet_type: "modal"
                     size_hint_y: 0.8
                     orientation: "vertical"
@@ -48,23 +50,51 @@ MDScreen:
                             icon: "close"
                             ripple_effect: False
                             on_release: bottom_sheet.dismiss(bottom_sheet)
-                    BoxLayout
+                    BoxLayout:
                         id: content_container
-                        padding: 0, 0, 0, "16dp"
-                   
-                    MDButton:
-                        style: "elevated"
-                        pos_hint: {"center_x": .5, "center_y": .5}
-                        theme_bg_color: "Custom"
-                        md_bg_color: "#EDF1F9"
-                        icon_color: "white"
-                        MDButtonIcon:
-                            icon: "plus"
+                        orientation: "vertical"
+                        padding: 0, 0, 0, "20dp"
+                        spacing: 50
 
-                        MDButtonText:
-                            text: "Elevated"
-                            theme_text_color: "Custom"
-                            text_color: "red"
-                            
+                        MDList:
+                            id: listBottomSheet
+                            padding: 0, 0, 250, 0
+
+                        MDBoxLayout:
+                            padding: 250, "50sp", 0, 100
+                            spacing: 50
+                            MDButton:
+                                id: buttonReservation
+                                style: "elevated"
+                                #size_hint_x: None
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                                theme_bg_color: "Custom"
+                                md_bg_color: "#000000"
+                                #icon_color: "white"
+                                #text: "хуй" почётный комментарий, не трогать!!!
+    #                            MDButtonIcon:
+    #                                icon: "plus"
+
+                                MDButtonText:
+                                    text: "Бронировать"
+                                    theme_text_color: "Custom"
+                                    text_color: "white"
+
+                            MDButton:
+                                id: buttonPay
+                                style: "elevated"
+                                pos_hint: {"center_x": .5, "center_y": .5}
+                                theme_bg_color: "Custom"
+                                md_bg_color: "#000000"
+                                #icon_color: "white"
+                                #text: "хуй" почётный комментарий, не трогать!!!
+    #                            MDButtonIcon:
+    #                                icon: "plus"
+
+                                MDButtonText:
+                                    text: "Оплатить"
+                                    theme_text_color: "Custom"
+                                    text_color: "white"
+
 
 
