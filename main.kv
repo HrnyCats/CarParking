@@ -1,14 +1,15 @@
 #:import MapSource kivy_garden.mapview.MapSource
 #:import asynckivy asynckivy
 
-MDScreen:
-    
+MainScreen:
+    id: mainScreen
+    link_screen_manager: screen_manager
+    link_reservation_screen: reservationScreen
     MDNavigationLayout:
-
         MDScreenManager:
-
+            id: screen_manager
             MDScreen:
-                
+                name: "screen1"
                 MDButton:
                     style: "elevated"
                     pos_hint: {"center_x": .5, "center_y": .5}
@@ -34,6 +35,7 @@ MDScreen:
                     id: bottom_sheet
                     link_button: buttonReservation
                     link_list: listBottomSheet
+                    link_screen: mainScreen
                     sheet_type: "modal"
                     size_hint_y: 0.8
                     orientation: "vertical"
@@ -41,7 +43,6 @@ MDScreen:
 
                     MDBottomSheetDragHandle:
                         drag_handle_color: "grey"
-
                         MDBottomSheetDragHandleTitle:
                             text: "text"
                             pos_hint: {"center_y": .5}
@@ -70,6 +71,7 @@ MDScreen:
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 theme_bg_color: "Custom"
                                 md_bg_color: "#000000"
+                                on_release: bottom_sheet.Reservation()#root.link_screen_manager.current = "screen2"
                                 #icon_color: "white"
                                 #text: "хуй" почётный комментарий, не трогать!!!
     #                            MDButtonIcon:
@@ -95,6 +97,40 @@ MDScreen:
                                     text: "Оплатить"
                                     theme_text_color: "Custom"
                                     text_color: "white"
+
+            ReservationScreen:
+                id: reservationScreen
+#                radius: [25, 0, 0, 0]
+#                md_bg_color: self.theme_cls.primaryColor
+                name: "screen2"
+                titleParking: labelTitle
+                addressParking: labelAddress
+                dateParking: labelData
+                timeStart: labelTime
+                numbersCar: labelNumbersCar
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: 50
+                    #pos_hint: {"center_x": 0.1,  "center_y": 0.9}
+                    MDLabel:
+                        id: labelTitle
+                    MDTextFieldHintText:
+                        text: "Hint text"
+                    MDLabel
+                        id: labelAddress
+                    MDLabel:
+                        id: labelData
+                        text: "пока не придумали как дату выводить"
+                    MDLabel
+                        id: labelTime
+                        text: "пока не придумали как время выводить"
+                    MDLabel
+                        id: labelNumbersCar
+
+
+
+
+
 
 
 

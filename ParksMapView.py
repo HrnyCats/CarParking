@@ -21,7 +21,6 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
 
     def __init__(self,**kwargs, ):
         super(ParksMapView, self).__init__(**kwargs)
-        #self.buildBottomSheet()
 
     # def buildBottomSheet(self):
     #     self.bottom_sheetLayout = MDBoxLayout(orientation="vertical")
@@ -75,24 +74,27 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
         # return
         self.bottom_sheet.link_list.clear_widgets()
 
-        headers = "id_car_parking,lon,lat,address,price,type_car_park,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end"
+        headers = "id_car_parking,lon,lat,address,price,type_car_park,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end,Name"
         headers = headers.split(',')
 
         dataPressedCarParking = args[0].parkData
 
-        #self.listData.size_hint = 1, 1
+        dataParking = {}
         labels = []
         for i in range(2, len(headers)):
             attributeName = headers[i]
             attributeValue = dataPressedCarParking[i]
 
+            dataParking[attributeName] = attributeValue
+
             labels.append(Label(text=f"{attributeName}: {attributeValue}"))
             labels[-1].color = (0,0,0,1)
             listitem = MDListItem(labels[-1])
-            # listitem.spacing = 0
             listitem.size_hint = 1, None
             listitem.height = self.bottom_sheet.height / len(headers)
             self.bottom_sheet.link_list.add_widget(listitem)
+
+        self.bottom_sheet.dataPressedCarParking = dataParking
 
         if self.bottom_sheet:
             self.bottom_sheet.set_state("toggle")
