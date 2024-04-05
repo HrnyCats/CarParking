@@ -5,6 +5,9 @@ from ParksMapView import ParksMapView
 from BottomSheet import BottomSheet
 from MainScreen import MainScreen
 from ReservationScreen import ReservationScreen
+from kivymd.uix.pickers import MDModalInputDatePicker
+from kivymd.theming import ThemeManager
+from kivy.metrics import dp
 import sqlite3
 
 
@@ -18,16 +21,24 @@ class MainApp(MDApp):
     }
     current_map = StringProperty("street")
 
+    def __init__(self, **kwargs):
+        super(MainApp, self).__init__()
+        # self.connection = sqlite3.connect("Parks.db")
+        # self.cursor = self.connection.cursor()
+
     def on_start(self):
         # Initialize GPS
-        print(self.theme_cls.backgroundColor)
-        # Connect to database
+        super().on_start()
         self.connection = sqlite3.connect("Parks.db")
         self.cursor = self.connection.cursor()
-        super().on_start()
-    
+
+        # Connect to database
+
     def build(self):
-        print(self.theme_cls.theme_style)
         return Builder.load_file("main.kv")
+
+    def show_date_picker(self):
+        date_dialog = MDModalInputDatePicker()
+        date_dialog.open()
 
 MainApp().run()

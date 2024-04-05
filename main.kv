@@ -21,6 +21,7 @@ MainScreen:
 
                     MDButtonText:
                         text: "Elevated"
+
                 ParksMapView:
                     bottom_sheet: bottom_sheet
                     map_source: MapSource(url=app.map_sources[app.current_map])
@@ -40,9 +41,9 @@ MainScreen:
                     link_screen: mainScreen
                     #adaptive_height: True
                     sheet_type: "modal"
-                    size_hint_y: 0.8
+                    size_hint_y: 0.5
                     orientation: "vertical"
-                    md_bg_color: app.theme_cls.surfaceColor
+                    #md_bg_color: app.theme_cls.backgroundColor
 
                     MDBottomSheetDragHandle:
                         drag_handle_color: "grey"
@@ -78,50 +79,72 @@ MainScreen:
                                     theme_text_color: "Custom"
                                     text_color: "white"
 
-                            MDButton:
-                                id: buttonPay
-                                style: "elevated"
-                                pos_hint: {"center_x": .5, "center_y": .5}
-                                theme_bg_color: "Custom"
-                                md_bg_color: "#000000"
-                                #icon_color: "white"
-                                #text: "хуй" почётный комментарий, не трогать!!!
-    #                            MDButtonIcon:
-    #                                icon: "plus"
+#                            MDButton:
+#                                id: buttonPay
+#                                style: "elevated"
+#                                pos_hint: {"center_x": .5, "center_y": .5}
+#                                theme_bg_color: "Custom"
+#                                md_bg_color: "#000000"
+#                                #icon_color: "white"
+#                                #text: "хуй" почётный комментарий, не трогать!!!
+#    #                            MDButtonIcon:
+#    #                                icon: "plus"
+#
+#                                MDButtonText:
+#                                    text: "Оплатить"
+#                                    theme_text_color: "Custom"
+#                                    text_color: "white"
 
-                                MDButtonText:
-                                    text: "Оплатить"
-                                    theme_text_color: "Custom"
-                                    text_color: "white"
 
             ReservationScreen:
                 id: reservationScreen
-#                radius: [25, 0, 0, 0]
-#                md_bg_color: self.theme_cls.primaryColor
                 name: "screen2"
                 titleParking: labelTitle
                 addressParking: labelAddress
                 dateParking: labelData
                 timeStart: labelTime
                 numbersCar: labelNumbersCar
+
                 MDBoxLayout:
                     orientation: "vertical"
                     spacing: 50
                     #pos_hint: {"center_x": 0.1,  "center_y": 0.9}
+                    MDBoxLayout:
+                        spacing: 10
+                        MDButton:
+                            MDButtonIcon:
+                                icon: "arrow-left"
+                                theme_text_color: "Custom"
+                                text_color: "black"
+                        MDLabel:
+                            text: "Бронировать"
+
                     MDLabel:
                         id: labelTitle
-                    MDTextFieldHintText:
-                        text: "Hint text"
                     MDLabel
                         id: labelAddress
-                    MDLabel:
-                        id: labelData
-                        text: "пока не придумали как дату выводить"
-                    MDLabel
-                        id: labelTime
-                        text: "пока не придумали как время выводить"
-                    MDLabel
-                        id: labelNumbersCar
+                    MDTextField:
+                        text: ""
+                        MDTextFieldHintText:
+                            text: "Дата стоянки"
+
+                MDButton:
+                    style: "elevated"
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    on_release: app.show_date_picker()
+
+                    MDButtonText:
+                        text: "Open modal date picker dialog"
+
+
+                MDLabel:
+                    id: labelData
+                    text: "пока не придумали как дату выводить"
+                MDLabel
+                    id: labelTime
+                    text: "пока не придумали как время выводить"
+                MDLabel
+                    id: labelNumbersCar
 
 
 
