@@ -1,5 +1,7 @@
 from kivy.properties import ObjectProperty
 from kivymd.uix.screen import MDScreen
+from kivy.app import App
+
 
 class ReservationScreen(MDScreen):
     titleParking = ObjectProperty()
@@ -7,6 +9,7 @@ class ReservationScreen(MDScreen):
     dateParking = ObjectProperty()
     time = ObjectProperty()
     numbersCar = ObjectProperty()
+
     def __init__(self,  **kwargs):
         super(ReservationScreen, self).__init__(**kwargs)
 
@@ -16,4 +19,3 @@ class ReservationScreen(MDScreen):
         # self.timeStart.text = dataPressedCarParking["schedule_time_start"]
         # self.timeEnd.text = dataPressedCarParking["schedule_time_end"]
         self.numbersCar.text = "тут должен быть номер"
-

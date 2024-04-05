@@ -90,8 +90,10 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
             labels.append(Label(text=f"{attributeName}: {attributeValue}"))
             labels[-1].color = (0,0,0,1)
             listitem = MDListItem(labels[-1])
-            listitem.size_hint = 1, None
-            listitem.height = self.bottom_sheet.height / len(headers)
+            listitem.padding = [0,0,0,0]
+            #listitem.height = 50
+            #listitem.size_hint = 1, None
+            #listitem.height = self.bottom_sheet.height / len(headers)
             self.bottom_sheet.link_list.add_widget(listitem)
 
         self.bottom_sheet.dataPressedCarParking = dataParking
