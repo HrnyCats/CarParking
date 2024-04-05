@@ -20,14 +20,14 @@ class MainApp(MDApp):
 
     def on_start(self):
         # Initialize GPS
-
+        print(self.theme_cls.backgroundColor)
         # Connect to database
         self.connection = sqlite3.connect("Parks.db")
         self.cursor = self.connection.cursor()
+        super().on_start()
     
     def build(self):
-        self.theme_cls.primary_palette = "Green"
-        Builder.load_file("main.kv")
-        return super().build()
+        print(self.theme_cls.theme_style)
+        return Builder.load_file("main.kv")
 
-main = MainApp().run()
+MainApp().run()

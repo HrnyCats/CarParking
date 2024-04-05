@@ -4,14 +4,15 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.label import MDLabel
 from ParkMarker import ParkMarker
 from kivymd.uix.behaviors import TouchBehavior
 from kivy.properties import StringProperty,ObjectProperty
 from BottomSheet import BottomSheet
 from kivymd.uix.bottomsheet import MDBottomSheet
-from kivymd.uix.list.list import MDList, MDListItem
+from kivymd.uix.list.list import MDList, MDListItem, MDListItemHeadlineText, MDListItemSupportingText
 from Singleton import Singleton
-
+from kivymd.uix.pickers import MDModalDatePicker
 
 class ParksMapView(MapView, TouchBehavior, Singleton):
     gettingParksTimer = None
@@ -87,12 +88,31 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
 
             dataParking[attributeName] = attributeValue
 
-            labels.append(Label(text=f"{attributeName}: {attributeValue}"))
-            labels[-1].color = (0,0,0,1)
-            listitem = MDListItem(labels[-1])
-            listitem.size_hint = 1, None
-            listitem.height = self.bottom_sheet.height / len(headers)
-            self.bottom_sheet.link_list.add_widget(listitem)
+            #labels.append(MDLabel(text=f"{attributeName}: {attributeValue}", pos_hint = {"center_x": 0, "center_y": .5},adaptive_size = True,  padding = {"4dp", "4dp"}))
+            #labels[-1].color = (0,0,0,1)
+            # listitem = MDListItem(labels[-1])
+            # listitem.size_hint = 0, None
+            # listitem.height = self.bottom_sheet.height / len(headers)
+            listItem = MDListItem(
+                MDListItemHeadlineText(
+                    text = f"{attributeName}",
+                    theme_text_color = "Custom",
+                    text_color = "#AAAAAA",
+                    font_style = "Label",
+                    role = "medium",
+                    font_size = 12,
+                ),
+                MDListItemSupportingText(
+                    text = f"{attributeValue}",
+                    theme_text_color = "Custom",
+                    text_color = "#585858",
+                    font_style = "Label",
+                    role = "medium",
+                    font_size = 14,
+                ),
+            )
+            listItem.height = 52
+            self.bottom_sheet.link_list.add_widget(listItem)
 
         self.bottom_sheet.dataPressedCarParking = dataParking
 

@@ -8,6 +8,8 @@ MainScreen:
     MDNavigationLayout:
         MDScreenManager:
             id: screen_manager
+            
+            md_bg_color: self.theme_cls.backgroundColor
             MDScreen:
                 name: "screen1"
                 MDButton:
@@ -36,6 +38,7 @@ MainScreen:
                     link_button: buttonReservation
                     link_list: listBottomSheet
                     link_screen: mainScreen
+                    #adaptive_height: True
                     sheet_type: "modal"
                     size_hint_y: 0.8
                     orientation: "vertical"
@@ -43,26 +46,19 @@ MainScreen:
 
                     MDBottomSheetDragHandle:
                         drag_handle_color: "grey"
-                        MDBottomSheetDragHandleTitle:
-                            text: "text"
-                            pos_hint: {"center_y": .5}
-
-                        MDBottomSheetDragHandleButton:
-                            icon: "close"
-                            ripple_effect: False
-                            on_release: bottom_sheet.dismiss(bottom_sheet)
-                    BoxLayout:
+                        
+                    MDBoxLayout:
                         id: content_container
                         orientation: "vertical"
-                        padding: 0, 0, 0, "20dp"
-                        spacing: 50
+                        md_bg_color: "black"
+                        #padding: 0, 0, 0, "20dp"
+                        #spacing: 50
 
                         MDList:
                             id: listBottomSheet
-                            padding: 0, 0, 250, 0
-
                         MDBoxLayout:
-                            padding: 250, "50sp", 0, 100
+                            #padding: 250, "50sp", 0, 100
+                            orientation: "horizontal"
                             spacing: 50
                             MDButton:
                                 id: buttonReservation
@@ -70,7 +66,7 @@ MainScreen:
                                 #size_hint_x: None
                                 pos_hint: {"center_x": .5, "center_y": .5}
                                 theme_bg_color: "Custom"
-                                md_bg_color: "#000000"
+                                md_bg_color: "#000000"  
                                 on_release: bottom_sheet.Reservation()#root.link_screen_manager.current = "screen2"
                                 #icon_color: "white"
                                 #text: "хуй" почётный комментарий, не трогать!!!
