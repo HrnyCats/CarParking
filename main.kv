@@ -5,6 +5,7 @@ MainScreen:
     id: mainScreen
     link_screen_manager: screen_manager
     link_reservation_screen: reservationScreen
+    link_payment_screen: paymentScreen
     MDNavigationLayout:
         MDScreenManager:
             id: screen_manager
@@ -37,11 +38,13 @@ MainScreen:
             ReservationScreen:
                 id: reservationScreen
                 name: "screen2"
+                link_screen: mainScreen
                 titleParking: labelTitle
                 addressParking: labelAddress
                 dateParking: labelData
                 timeStart: labelTime
-                numbersCar: labelNumbersCar
+                numbersCar: textfieldNumbersCar
+                md_bg_color: self.theme_cls.backgroundColor
 
                 MDBoxLayout:
                     orientation: "vertical"
@@ -61,28 +64,110 @@ MainScreen:
                         id: labelTitle
                     MDLabel
                         id: labelAddress
+
+                    MDButton:
+                        style: "elevated"
+                        #pos_hint: {'center_x': .5, 'center_y': .5}
+                        on_release: app.show_date_picker(root.link_reservation_screen)
+
+                        MDButtonText:
+                            text: "Выберите дату стоянки"
+
+                    MDLabel:
+                        id: labelData
+                        text: "пока не придумали как дату выводить"
+                    MDLabel
+                        id: labelTime
+                        text: "пока не придумали как время выводить"
+
                     MDTextField:
-                        text: ""
+                        id: textfieldNumbersCar
+                        mode: "filled"
                         MDTextFieldHintText:
-                            text: "Дата стоянки"
+                            text: "Регистрационный номер"
+                        MDTextFieldHelperText:
+                            text: "Номер машины"
+                            mode: "persistent"
 
-                MDButton:
-                    style: "elevated"
-                    pos_hint: {'center_x': .5, 'center_y': .5}
-                    on_release: app.show_date_picker()
+                        MDTextFieldMaxLengthText:
+                            max_text_length: 10
 
-                    MDButtonText:
-                        text: "Open modal date picker dialog"
+                    MDButton:
+                        style: "elevated"
+                        theme_bg_color: "Custom"
+                        md_bg_color: "#000000"
+                        on_release: reservationScreen.proceed_to_payment()
+                        MDButtonText:
+                            text: "Перейти к оплате"
+                            theme_text_color: "Custom"
+                            text_color: "white"
 
+            PaymentScreen:
+                id: paymentScreen
+                name: "screen3"
+                link_numbersCard: numbersCard
+                link_expiryDateYears: expiryDateYears
+                link_expiryDateMonths: expiryDateMounts
+                link_cv_code: cv_code
+                md_bg_color: self.theme_cls.backgroundColor
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: 50
+                    TextInputField:
+                        id: numbersCard
+                        mode: "outlined"
+                        max_characters: 15
+                        input_filter: 'int'
+                        MDTextFieldHintText:
+                            text: "Номер карты"
+                        MDTextFieldHelperText:
+                            text: "16-значный номер, расположенный на обороте карты"
+                            mode: "persistent"
 
-                MDLabel:
-                    id: labelData
-                    text: "пока не придумали как дату выводить"
-                MDLabel
-                    id: labelTime
-                    text: "пока не придумали как время выводить"
-                MDLabel
-                    id: labelNumbersCar
+                        MDTextFieldMaxLengthText:
+                            max_text_length: 16
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        TextInputField:
+                            id: expiryDateYears
+                            mode: "outlined"
+                            max_characters: 1
+                            input_filter: 'int'
+                            MDTextFieldHintText:
+                                text: "Срок действия(год)"
+                            MDTextFieldMaxLengthText:
+                                max_text_length: 2
+
+                        TextInputField:
+                            id: expiryDateMounts
+                            mode: "filled"
+                            max_characters: 1
+                            input_filter: 'int'
+                            MDTextFieldHintText:
+                                text: "Срок действия(месяц)"
+                            MDTextFieldMaxLengthText:
+                                max_text_length: 2
+
+                    TextInputField:
+                        id: cv_code
+                        mode: "outlined"
+                        max_characters: 2
+                        input_filter: 'int'
+                        MDTextFieldHintText:
+                            text: "CV код"
+                        MDTextFieldMaxLengthText:
+                            max_text_length: 3
+
+                    MDButton:
+                        style: "elevated"
+                        theme_bg_color: "Custom"
+                        md_bg_color: "#000000"
+                        on_release: paymentScreen.payment()
+                        MDButtonText:
+                            text: "Оплатить"
+                            theme_text_color: "Custom"
+                            text_color: "white"
         BottomSheet:
             id: bottom_sheet
             link_button: buttonReservation
@@ -146,6 +231,11 @@ MainScreen:
 #                                    text: "Оплатить"
 #                                    theme_text_color: "Custom"
 #                                    text_color: "white"
+
+
+
+
+
 
 
 

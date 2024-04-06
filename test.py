@@ -52,7 +52,7 @@ MDScreen:
 
         MDBottomSheet:
             id: bottom_sheet
-            sheet_type: "standard"
+            sheet_type: "modal"
             size_hint_y: None
             height: "150dp"
             on_open: asynckivy.start(app.generate_content())
