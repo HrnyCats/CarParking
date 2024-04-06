@@ -82,7 +82,7 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
 
         dataParking = {}
         labels = []
-        for i in range(2, len(headers)):
+        for i in range(len(headers)):
             attributeName = headers[i]
             attributeValue = dataPressedCarParking[i]
 
@@ -101,7 +101,8 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
                     font_style = "Label",
                     role = "medium",
                     font_size = 12,
-                ),
+                    #md_bg_color = self.bottom_sheet.md_bg_color,
+            ),
                 MDListItemSupportingText(
                     text = f"{attributeValue}",
                     theme_text_color = "Custom",
@@ -109,6 +110,7 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
                     font_style = "Label",
                     role = "medium",
                     font_size = 14,
+                    #md_bg_color=self.bottom_sheet.md_bg_color,
                 ),
             )
             listItem.height = 52
