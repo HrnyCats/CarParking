@@ -75,7 +75,7 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
         # return
         self.bottom_sheet.link_list.clear_widgets()
 
-        headers = "id_car_parking,lon,lat,address,price,type_car_park,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end,Name"
+        headers = "id_car_parking,lon,lat,address,price,type_car_park,places,places_with_disabilities,schedule_time_start,schedule_time_end,schedule_weekday_start,schedule_weekday_end,Name"
         headers = headers.split(',')
 
         dataPressedCarParking = args[0].parkData
@@ -87,35 +87,139 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
             attributeValue = dataPressedCarParking[i]
 
             dataParking[attributeName] = attributeValue
-
-            #labels.append(MDLabel(text=f"{attributeName}: {attributeValue}", pos_hint = {"center_x": 0, "center_y": .5},adaptive_size = True,  padding = {"4dp", "4dp"}))
-            #labels[-1].color = (0,0,0,1)
-            # listitem = MDListItem(labels[-1])
-            # listitem.size_hint = 0, None
-            # listitem.height = self.bottom_sheet.height / len(headers)
-            listItem = MDListItem(
+        self.bottom_sheet.dataPressedCarParking = dataParking
+        
+        #Name, Type
+        listItem = MDListItem(
                 MDListItemHeadlineText(
-                    text = f"{attributeName}",
+                    text = str(dataParking["Name"]),
+                    theme_text_color = "Custom",
+                    text_color = "#000000",
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 20,
+                ),
+                MDListItemSupportingText(
+                    text = str(dataParking["type_car_park"]),
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 13,
+                ),
+                theme_bg_color = "Custom",
+                md_bg_color = self.bottom_sheet.md_bg_color,
+            )
+        listItem.height = 60
+        self.bottom_sheet.link_list.add_widget(listItem)
+
+        #Adress
+        listItem = MDListItem(
+                MDListItemHeadlineText(
+                    text = "Адрес",
                     theme_text_color = "Custom",
                     text_color = "#AAAAAA",
-                    font_style = "Label",
+                    font_style = "Title",
                     role = "medium",
                     font_size = 12,
                 ),
                 MDListItemSupportingText(
-                    text = f"{attributeValue}",
-                    theme_text_color = "Custom",
-                    text_color = "#585858",
-                    font_style = "Label",
+                    text = str(dataParking["address"]),
+                    font_style = "Title",
                     role = "medium",
                     font_size = 14,
                 ),
+                theme_bg_color = "Custom",
+                md_bg_color = self.bottom_sheet.md_bg_color,
             )
-            listItem.height = 52
-            self.bottom_sheet.link_list.add_widget(listItem)
+        listItem.height = 52
+        self.bottom_sheet.link_list.add_widget(listItem)
 
-        self.bottom_sheet.dataPressedCarParking = dataParking
+        #Price
+        listItem = MDListItem(
+                MDListItemHeadlineText(
+                    text = "Цена за час",
+                    theme_text_color = "Custom",
+                    text_color = "#AAAAAA",
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 12,
+                ),
+                MDListItemSupportingText(
+                    text = str(dataParking["price"]),
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 14,
+                ),
+                theme_bg_color = "Custom",
+                md_bg_color = self.bottom_sheet.md_bg_color,
+            )
+        listItem.height = 52
+        self.bottom_sheet.link_list.add_widget(listItem)
 
+        #Places
+        listItem = MDListItem(
+                MDListItemHeadlineText(
+                    text = "Мест всего",
+                    theme_text_color = "Custom",
+                    text_color = "#AAAAAA",
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 12,
+                ),
+                MDListItemSupportingText(
+                    text = str(dataParking["places"]),
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 14,
+                ),
+                theme_bg_color = "Custom",
+                md_bg_color = self.bottom_sheet.md_bg_color,
+            )
+        listItem.height = 52
+        self.bottom_sheet.link_list.add_widget(listItem)
+
+        #Places disabilities
+        listItem = MDListItem(
+                MDListItemHeadlineText(
+                    text = "Мест для инвалидов",
+                    theme_text_color = "Custom",
+                    text_color = "#AAAAAA",
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 12,
+                ),
+                MDListItemSupportingText(
+                    text = str(dataParking["places_with_disabilities"]),
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 14,
+                ),
+                theme_bg_color = "Custom",
+                md_bg_color = self.bottom_sheet.md_bg_color,
+            )
+        listItem.height = 52
+        self.bottom_sheet.link_list.add_widget(listItem)
+
+        #Additional
+        listItem = MDListItem(
+                MDListItemHeadlineText(
+                    text = "Дополнительно",
+                    theme_text_color = "Custom",
+                    text_color = "#AAAAAA",
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 12,
+                ),
+                MDListItemSupportingText(
+                    text = "Пн-Вс: 00.00-24.00",
+                    font_style = "Title",
+                    role = "medium",
+                    font_size = 14,
+                ),
+                theme_bg_color = "Custom",
+                md_bg_color = self.bottom_sheet.md_bg_color,
+            )
+        listItem.height = 52
+        self.bottom_sheet.link_list.add_widget(listItem)
         if self.bottom_sheet:
             self.bottom_sheet.set_state("toggle")
 

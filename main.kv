@@ -8,8 +8,6 @@ MainScreen:
     MDNavigationLayout:
         MDScreenManager:
             id: screen_manager
-            
-            md_bg_color: self.theme_cls.backgroundColor
             MDScreen:
                 name: "screen1"
                 MDButton:
@@ -34,67 +32,7 @@ MainScreen:
                         self.StartGettingParksInFov()
                     on_lon:
                         self.StartGettingParksInFov()
-                BottomSheet:
-                    id: bottom_sheet
-                    link_button: buttonReservation
-                    link_list: listBottomSheet
-                    link_screen: mainScreen
-                    #adaptive_height: True
-                    sheet_type: "modal"
-                    size_hint_y: 0.5
-                    orientation: "vertical"
-                    #md_bg_color: app.theme_cls.backgroundColor
-
-                    MDBottomSheetDragHandle:
-                        drag_handle_color: "grey"
-                        
-                    MDBoxLayout:
-                        id: content_container
-                        orientation: "vertical"
-                        md_bg_color: "black"
-                        #padding: 0, 0, 0, "20dp"
-                        #spacing: 50
-
-                        MDList:
-                            id: listBottomSheet
-                        MDBoxLayout:
-                            #padding: 250, "50sp", 0, 100
-                            orientation: "horizontal"
-                            spacing: 50
-                            MDButton:
-                                id: buttonReservation
-                                style: "elevated"
-                                #size_hint_x: None
-                                pos_hint: {"center_x": .5, "center_y": .5}
-                                theme_bg_color: "Custom"
-                                md_bg_color: "#000000"  
-                                on_release: bottom_sheet.Reservation()#root.link_screen_manager.current = "screen2"
-                                #icon_color: "white"
-                                #text: "хуй" почётный комментарий, не трогать!!!
-    #                            MDButtonIcon:
-    #                                icon: "plus"
-
-                                MDButtonText:
-                                    text: "Бронировать"
-                                    theme_text_color: "Custom"
-                                    text_color: "white"
-
-#                            MDButton:
-#                                id: buttonPay
-#                                style: "elevated"
-#                                pos_hint: {"center_x": .5, "center_y": .5}
-#                                theme_bg_color: "Custom"
-#                                md_bg_color: "#000000"
-#                                #icon_color: "white"
-#                                #text: "хуй" почётный комментарий, не трогать!!!
-#    #                            MDButtonIcon:
-#    #                                icon: "plus"
-#
-#                                MDButtonText:
-#                                    text: "Оплатить"
-#                                    theme_text_color: "Custom"
-#                                    text_color: "white"
-
+        
 
             ReservationScreen:
                 id: reservationScreen
@@ -145,6 +83,70 @@ MainScreen:
                     text: "пока не придумали как время выводить"
                 MDLabel
                     id: labelNumbersCar
+        BottomSheet:
+            id: bottom_sheet
+            link_button: buttonReservation
+            link_list: listBottomSheet
+            link_screen: mainScreen
+            #adaptive_height: True
+            sheet_type: "modal"
+            size_hint_y: None
+            #orientation: "vertical"
+            height:433
+            MDBottomSheetDragHandle:
+                drag_handle_color: "#A3A2A2"
+                
+                        
+            MDBoxLayout:
+                id: content_container
+                orientation: "vertical"
+                
+
+                MDList:
+                    id: listBottomSheet
+                MDFloatLayout:
+                    padding: 0, 0, 0, 0
+                    #orientation: "horizontal"
+                    height: 60
+                    #spacing: 50
+                    MDButton:
+                        id: buttonReservation
+                        style: "elevated"
+                        theme_width: "Custom"
+                        theme_height: "Custom"
+                        size_hint: 0.7,.6
+                        pos_hint: {'center_x':0.5, 'center_y':0.5}
+                        theme_bg_color: "Custom"
+                        md_bg_color: "#000000"  
+                        on_release: bottom_sheet.Reservation()
+                        #icon_color: "white"
+                        #text: "хуй" почётный комментарий, не трогать!!!
+#                            MDButtonIcon:
+#                                icon: "plus"
+
+                        MDButtonText:
+                            text: "Бронировать"
+                            font_size:15
+                            pos_hint: {"center_x": .5, "center_y": .5}
+                            theme_text_color: "Custom"
+                            text_color: "white"
+
+#                            MDButton:
+#                                id: buttonPay
+#                                style: "elevated"
+#                                pos_hint: {"center_x": .5, "center_y": .5}
+#                                theme_bg_color: "Custom"
+#                                md_bg_color: "#000000"
+#                                #icon_color: "white"
+#                                #text: "хуй" почётный комментарий, не трогать!!!
+#    #                            MDButtonIcon:
+#    #                                icon: "plus"
+#
+#                                MDButtonText:
+#                                    text: "Оплатить"
+#                                    theme_text_color: "Custom"
+#                                    text_color: "white"
+
 
 
 

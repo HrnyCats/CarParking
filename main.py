@@ -27,12 +27,15 @@ class MainApp(MDApp):
         # self.cursor = self.connection.cursor()
 
     def on_start(self):
-        # Initialize GPS
         super().on_start()
-        self.connection = sqlite3.connect("Parks.db")
-        self.cursor = self.connection.cursor()
+        # Initialize GPS
+        
+        
 
         # Connect to database
+        self.connection = sqlite3.connect("Parks.db")
+        self.cursor = self.connection.cursor()
+        
 
     def build(self):
         return Builder.load_file("main.kv")
