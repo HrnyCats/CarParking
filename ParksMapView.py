@@ -35,8 +35,6 @@ class ParksMapView(MapView, TouchBehavior, Singleton):
     #     buttonBox.add_widget(buttomPay)
     #     self.bottom_sheetLayout.add_widget(buttonBox)
 
-
-
     def StartGettingParksInFov(self):
         # Каждую секунду, получаем маркеты в поле зрении
         try:
