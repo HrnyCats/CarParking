@@ -40,6 +40,7 @@ MainScreen:
                 name: "screen2"
                 link_screen: mainScreen
                 titleParking: labelTitle
+                typePark: labelType
                 addressParking: labelAddress
                 dateParking: labelData
                 timeStart: labelTime
@@ -48,20 +49,45 @@ MainScreen:
 
                 MDBoxLayout:
                     orientation: "vertical"
-                    spacing: 50
-                    #pos_hint: {"center_x": 0.1,  "center_y": 0.9}
-                    MDBoxLayout:
-                        spacing: 10
-                        MDButton:
-                            MDButtonIcon:
+                    
+                    MDTopAppBar:
+                        type: "small"
+                        height:"40dp"
+                        MDTopAppBarLeadingButtonContainer:
+                            MDActionTopAppBarButton:
                                 icon: "arrow-left"
-                                theme_text_color: "Custom"
-                                text_color: "black"
+                        MDTopAppBarTitle:
+                            text: "Итого:"
+                    
+                    MDBoxLayout:
+                        padding: 20,0,20,0
+                        orientation: "vertical"
+                        spacing:0
                         MDLabel:
-                            text: "Бронировать"
+                            id: labelTitle
+                            text: "Park Name"
+                            theme_text_color: "Custom"
+                            text_color:"#000000"
+                            font_style: "Title"
+                            role: "medium"
+                            haling: "center"
+                            font_size: 20
+                            valing:"bottom"
+                            theme_bg_color: "Custom"
+                            md_bg_color: "#AAAAAA"
+                        MDLabel:
+                            id: labelType
+                            text: "Park Type"
+                            theme_text_color: "Custom"
+                            text_color:"#000000"
+                            font_style: "Title"
+                            role: "medium"
+                            underline: True
+                            font_size: 20    
+
 
                     MDLabel:
-                        id: labelTitle
+                        
                     MDLabel
                         id: labelAddress
 

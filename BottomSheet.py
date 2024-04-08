@@ -12,7 +12,7 @@ class BottomSheet(MDBottomSheet):
     def Reservation(self):
         if not self.dataPressedCarParking:
             return
-
+        self.set_state("close")
         self.link_screen.link_reservation_screen.filling_in_the_data(self.dataPressedCarParking)
         self.link_screen.link_screen_manager.current = "screen2"
 
