@@ -41,8 +41,6 @@ MainScreen:
                 link_screen: mainScreen
                 titleParking: labelTitle
                 addressParking: labelAddress
-                dateParking: labelData
-                timeStart: labelTime
                 numbersCar: textfieldNumbersCar
                 md_bg_color: self.theme_cls.backgroundColor
 
@@ -53,6 +51,7 @@ MainScreen:
                     MDBoxLayout:
                         spacing: 10
                         MDButton:
+                            on_release: reservationScreen.back()
                             MDButtonIcon:
                                 icon: "arrow-left"
                                 theme_text_color: "Custom"
@@ -73,12 +72,11 @@ MainScreen:
                         MDButtonText:
                             text: "Выберите дату стоянки"
 
-                    MDLabel:
-                        id: labelData
-                        text: "пока не придумали как дату выводить"
-                    MDLabel
-                        id: labelTime
-                        text: "пока не придумали как время выводить"
+                    MDButton:
+                        style: "elevated"
+                        on_release: app.show_time_picker(root.link_reservation_screen)
+                        MDButtonText:
+                            text: "Выберите длительность стоянки"
 
                     MDTextField:
                         id: textfieldNumbersCar
@@ -105,14 +103,27 @@ MainScreen:
             PaymentScreen:
                 id: paymentScreen
                 name: "screen3"
+                link_screen: mainScreen
                 link_numbersCard: numbersCard
                 link_expiryDateYears: expiryDateYears
                 link_expiryDateMonths: expiryDateMounts
                 link_cv_code: cv_code
                 md_bg_color: self.theme_cls.backgroundColor
+
                 MDBoxLayout:
                     orientation: "vertical"
                     spacing: 50
+                    MDBoxLayout:
+                        spacing: 10
+                        MDButton:
+                            on_release: paymentScreen.back()
+                            MDButtonIcon:
+                                icon: "arrow-left"
+                                theme_text_color: "Custom"
+                                text_color: "black"
+                        MDLabel:
+                            text: "Оплата"
+
                     TextInputField:
                         id: numbersCard
                         mode: "outlined"
@@ -180,12 +191,10 @@ MainScreen:
             height:433
             MDBottomSheetDragHandle:
                 drag_handle_color: "#A3A2A2"
-                
-                        
+
             MDBoxLayout:
                 id: content_container
                 orientation: "vertical"
-                
 
                 MDList:
                     id: listBottomSheet

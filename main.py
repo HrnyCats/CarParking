@@ -1,9 +1,10 @@
 import sqlite3
 from kivy.lang import Builder
-from kivy.properties import StringProperty,ObjectProperty
+from kivy.properties import StringProperty, ObjectProperty
 from kivymd.app import MDApp
 from kivy.clock import Clock
 from kivymd.uix.pickers import MDModalInputDatePicker, MDModalDatePicker
+from kivymd.uix.pickers import MDTimePickerInput
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarSupportingText, MDSnackbarText
 from kivymd.theming import ThemeManager
 from kivy.metrics import dp
@@ -133,5 +134,31 @@ class MainApp(MDApp):
         self.date_dialog.bind(on_ok=self.on_ok)
         self.date_dialog.bind(on_cancel=self.on_cancel)
         self.date_dialog.open()
+
+    def on_cancel_time(self, time_picker_vertical):
+        time_picker_vertical.dismiss()
+
+    def on_ok_time(self, time_picker_vertical):
+        self.screen.timeParking = time_picker_vertical.time
+
+        MDSnackbar(
+            MDSnackbarSupportingText(
+                text=f"Time is `{time_picker_vertical.time}`",
+            ),
+            y=dp(24),
+            orientation="horizontal",
+            pos_hint={"center_x": 0.5},
+            size_hint_x=0.5,
+        ).open()
+
+        time_picker_vertical.dismiss()
+
+    def show_time_picker(self, screen):
+        if not self.screen:
+            self.screen = screen
+        time_dialog = MDTimePickerInput()
+        time_dialog.bind(on_cancel=self.on_cancel_time)
+        time_dialog.bind(on_ok=self.on_ok_time)
+        time_dialog.open()
 
 MainApp().run()
