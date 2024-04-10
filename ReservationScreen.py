@@ -20,7 +20,7 @@ class ReservationScreen(MDScreen):
     def filling_in_the_data(self, dataPressedCarParking):
         self.id = dataPressedCarParking['id_car_parking']
         self.titleParking.text = dataPressedCarParking["Name"]
-        self.typePark.text = dataPressedCarParking["type_car_park "]
+        self.typePark.text = dataPressedCarParking["type_car_park"]
         self.addressParking.text = dataPressedCarParking["address"]
 
     def proceed_to_payment(self):
