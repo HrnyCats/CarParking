@@ -1,5 +1,7 @@
 from kivy.properties import ObjectProperty
 from kivymd.uix.screen import MDScreen
+from kivymd.uix.snackbar import MDSnackbar, MDSnackbarSupportingText, MDSnackbarText
+from kivy.metrics import dp
 from kivy.app import App
 
 class PaymentScreen(MDScreen):
@@ -26,7 +28,7 @@ class PaymentScreen(MDScreen):
         args = (self.id_park,
                 int(self.link_screen.link_reservation_screen.numbersCar.text),
                 minutes,
-                int(self.link_numbersCard.text),
+                self.link_numbersCard.text,
                 self.link_expiryDateYears.text + "/" + self.link_expiryDateMonths.text,
                 int(self.link_cv_code.text)
         )
@@ -34,6 +36,19 @@ class PaymentScreen(MDScreen):
         sqlStatement = f"INSERT INTO Payment (id_car_park, car_number, duration, card_numbers, expiry_date, CV_code) VALUES ({args[0]}, {args[1]}, {args[2]}, {args[3]}, {args[4]}, {args[5]})"
         app.cursor.execute(sqlStatement)
         app.connection.commit()
+
+        MDSnackbar(
+            MDSnackbarSupportingText(
+                text=f"Парковка забронирована",
+            ),
+            y=dp(24),
+            orientation="horizontal",
+            pos_hint={"center_x": 0.5},
+            size_hint_x=0.5,
+            background_color="olive"
+        ).open()
+
+        self.link_screen.link_screen_manager.current = "screen1"
 
     def back(self):
         self.link_numbersCard.text = ""
