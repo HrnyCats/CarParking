@@ -51,6 +51,7 @@ MainScreen:
                     MDTopAppBar:
                         type: "small"
                         height:"40dp"
+                        #on_action_button: reservation.back()
                         MDTopAppBarLeadingButtonContainer:
                             MDActionTopAppBarButton:
                                 icon: "arrow-left"
@@ -84,7 +85,7 @@ MainScreen:
                             font_size: 20    
 
 
-                    MDLabel:
+                    #MDLabel:
                         
                     MDLabel
                         id: labelAddress
@@ -111,9 +112,6 @@ MainScreen:
                         MDTextFieldHelperText:
                             text: "Номер машины"
                             mode: "persistent"
-
-                        MDTextFieldMaxLengthText:
-                            max_text_length: 10
 
                     MDButton:
                         style: "elevated"
