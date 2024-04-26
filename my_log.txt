@@ -1,0 +1,684 @@
+# Ensure build layout
+# Check configuration tokens
+# Preparing build
+# Check requirements for android
+# Search for Git (git)
+#  -> found at /usr/bin/git
+# Search for Cython (cython)
+#  -> found at /usr/local/bin/cython
+# Search for Java compiler (javac)
+#  -> found at /usr/bin/javac
+# Search for Java keytool (keytool)
+#  -> found at /usr/bin/keytool
+# Install platform
+# Run 'git config --get remote.origin.url' ...
+# Cwd /home/nofreya/CarParking/.buildozer/android/platform/python-for-android
+https://github.com/kivy/python-for-android.git
+# Run 'git branch -vv' ...
+# Cwd /home/nofreya/CarParking/.buildozer/android/platform/python-for-android
+* master 957a3e5f [origin/master] Merge pull request #2959 from kivy/release-2024.01.21
+# Run '/usr/bin/python3 -m pip install -q --user appdirs colorama>=0.3.3 jinja2 sh>=1.10, <2.0; sys_platform!="win32" build toml packaging setuptools' ...
+# Cwd None
+# Apache ANT found at /home/nofreya/.buildozer/android/platform/apache-ant-1.9.4
+# Android SDK found at /home/nofreya/.buildozer/android/platform/android-sdk
+# Recommended android's NDK version by p4a is: 25b
+# Android NDK found at /home/nofreya/.buildozer/android/platform/android-ndk-r25b
+# Run '/usr/bin/python3 -m pythonforandroid.toolchain aab -h --color=always --storage-dir=/home/nofreya/CarParking/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a --ndk-api=21 --ignore-setup-py --debug' ...
+# Cwd /home/nofreya/CarParking/.buildozer/android/platform/python-for-android
+usage: toolchain.py aab [-h] [--debug] [--color {always,never,auto}]
+                        [--sdk-dir SDK_DIR] [--ndk-dir NDK_DIR]
+                        [--android-api ANDROID_API]
+                        [--ndk-version NDK_VERSION] [--ndk-api NDK_API]
+                        [--symlink-bootstrap-files]
+                        [--storage-dir STORAGE_DIR] [--arch ARCH]
+                        [--dist-name DIST_NAME] [--requirements REQUIREMENTS]
+                        [--recipe-blacklist RECIPE_BLACKLIST]
+                        [--blacklist-requirements BLACKLIST_REQUIREMENTS]
+                        [--bootstrap BOOTSTRAP] [--hook HOOK] [--force-build]
+                        [--no-force-build] [--require-perfect-match]
+                        [--no-require-perfect-match] [--allow-replace-dist]
+                        [--no-allow-replace-dist]
+                        [--local-recipes LOCAL_RECIPES]
+                        [--activity-class-name ACTIVITY_CLASS_NAME]
+                        [--service-class-name SERVICE_CLASS_NAME]
+                        [--java-build-tool {auto,ant,gradle}] [--copy-libs]
+                        [--no-copy-libs] [--add-asset ASSETS]
+                        [--add-resource RESOURCES] [--private PRIVATE]
+                        [--use-setup-py] [--ignore-setup-py] [--release]
+                        [--with-debug-symbols] [--keystore KEYSTORE]
+                        [--signkey SIGNKEY] [--keystorepw KEYSTOREPW]
+                        [--signkeypw SIGNKEYPW]
+
+options:
+  -h, --help            show this help message and exit
+  --debug               Display debug output and all build info
+  --color {always,never,auto}
+                        Enable or disable color output (default enabled on
+                        tty)
+  --sdk-dir SDK_DIR, --sdk_dir SDK_DIR
+                        The filepath where the Android SDK is installed
+  --ndk-dir NDK_DIR, --ndk_dir NDK_DIR
+                        The filepath where the Android NDK is installed
+  --android-api ANDROID_API, --android_api ANDROID_API
+                        The Android API level to build against defaults to 33
+                        if not specified.
+  --ndk-version NDK_VERSION, --ndk_version NDK_VERSION
+                        DEPRECATED: the NDK version is now found automatically
+                        or not at all.
+  --ndk-api NDK_API     The Android API level to compile against. This should
+                        be your *minimal supported* API, not normally the same
+                        as your --android-api. Defaults to min(ANDROID_API,
+                        21) if not specified.
+  --symlink-bootstrap-files, --ssymlink_bootstrap_files
+                        If True, symlinks the bootstrap files creation. This
+                        is useful for development only, it could also cause
+                        weird problems.
+  --storage-dir STORAGE_DIR
+                        Primary storage directory for downloads and builds
+                        (default: /home/nofreya/.local/share/python-for-
+                        android)
+  --arch ARCH           The archs to build for.
+  --dist-name DIST_NAME, --dist_name DIST_NAME
+                        The name of the distribution to use or create
+  --requirements REQUIREMENTS
+                        Dependencies of your app, should be recipe names or
+                        Python modules. NOT NECESSARY if you are using Python
+                        3 with --use-setup-py
+  --recipe-blacklist RECIPE_BLACKLIST
+                        Blacklist an internal recipe from use. Allows
+                        disabling Python 3 core modules to save size
+  --blacklist-requirements BLACKLIST_REQUIREMENTS
+                        Blacklist an internal recipe from use. Allows
+                        disabling Python 3 core modules to save size
+  --bootstrap BOOTSTRAP
+                        The bootstrap to build with. Leave unset to choose
+                        automatically.
+  --hook HOOK           Filename to a module that contains python-for-android
+                        hooks
+  --local-recipes LOCAL_RECIPES, --local_recipes LOCAL_RECIPES
+                        Directory to look for local recipes
+  --activity-class-name ACTIVITY_CLASS_NAME
+                        The full java class name of the main activity
+  --service-class-name SERVICE_CLASS_NAME
+                        Full java package name of the PythonService class
+  --java-build-tool {auto,ant,gradle}
+                        The java build tool to use when packaging the APK,
+                        defaults to automatically selecting an appropriate
+                        tool.
+  --add-asset ASSETS    Put this in the assets folder in the apk.
+  --add-resource RESOURCES
+                        Put this in the res folder in the apk.
+  --private PRIVATE     the directory with the app source code files
+                        (containing your main.py entrypoint)
+  --use-setup-py        Process the setup.py of a project if present.
+                        (Experimental!
+  --ignore-setup-py     Don't run the setup.py of a project if present. This
+                        may be required if the setup.py is not designed to
+                        work inside p4a (e.g. by installing dependencies that
+                        won't work or aren't desired on Android
+  --release             Build your app as a non-debug release build. (Disables
+                        gdb debugging among other things)
+  --with-debug-symbols  Will keep debug symbols from `.so` files.
+  --keystore KEYSTORE   Keystore for JAR signing key, will use jarsigner
+                        default if not specified (release build only)
+  --signkey SIGNKEY     Key alias to sign PARSER_APK. with (release build
+                        only)
+  --keystorepw KEYSTOREPW
+                        Password for keystore
+  --signkeypw SIGNKEYPW
+                        Password for key alias
+
+  Whether to force compilation of a new distribution
+
+  --force-build
+  --no-force-build      (this is the default)
+  --require-perfect-match
+  --no-require-perfect-match
+                        (this is the default)
+  --allow-replace-dist  (this is the default)
+  --no-allow-replace-dist
+  --copy-libs
+  --no-copy-libs        (this is the default)
+# Check application requirements
+# Compile platform
+# Run '/usr/bin/python3 -m pythonforandroid.toolchain create --dist_name=HrnyCats.CarParking --bootstrap=sdl2 --requirements=python3,kivy --arch=arm64-v8a --arch=armeabi-v7a --copy-libs --color=always --storage-dir=/home/nofreya/CarParking/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a --ndk-api=21 --ignore-setup-py --debug' ...
+# Cwd /home/nofreya/CarParking/.buildozer/android/platform/python-for-android
+# Build the application #3
+# Copy application source from /home/nofreya/CarParking
+# Remove directory and subdirectory /home/nofreya/CarParking/.buildozer/android/app
+# Create directory /home/nofreya/CarParking/.buildozer/android/app
+# Copy /home/nofreya/CarParking/main.kv to /home/nofreya/CarParking/.buildozer/android/app/main.kv
+# Copy /home/nofreya/CarParking/MainScreen.py to /home/nofreya/CarParking/.buildozer/android/app/MainScreen.py
+# Copy /home/nofreya/CarParking/main backup.py to /home/nofreya/CarParking/.buildozer/android/app/main backup.py
+# Copy /home/nofreya/CarParking/Singleton.py to /home/nofreya/CarParking/.buildozer/android/app/Singleton.py
+# Copy /home/nofreya/CarParking/ParkMarker.py to /home/nofreya/CarParking/.buildozer/android/app/ParkMarker.py
+# Copy /home/nofreya/CarParking/marker.png to /home/nofreya/CarParking/.buildozer/android/app/marker.png
+# Copy /home/nofreya/CarParking/MarkerPopupMenu.py to /home/nofreya/CarParking/.buildozer/android/app/MarkerPopupMenu.py
+# Copy /home/nofreya/CarParking/test.py to /home/nofreya/CarParking/.buildozer/android/app/test.py
+# Copy /home/nofreya/CarParking/ParksMapView.py to /home/nofreya/CarParking/.buildozer/android/app/ParksMapView.py
+# Copy /home/nofreya/CarParking/PaymentScreen.py to /home/nofreya/CarParking/.buildozer/android/app/PaymentScreen.py
+# Copy /home/nofreya/CarParking/TextInputField.py to /home/nofreya/CarParking/.buildozer/android/app/TextInputField.py
+# Copy /home/nofreya/CarParking/main.py to /home/nofreya/CarParking/.buildozer/android/app/main.py
+# Copy /home/nofreya/CarParking/ReservationScreen.py to /home/nofreya/CarParking/.buildozer/android/app/ReservationScreen.py
+# Copy /home/nofreya/CarParking/BottomSheet.py to /home/nofreya/CarParking/.buildozer/android/app/BottomSheet.py
+# Create directory /home/nofreya/CarParking/.buildozer/android/app/cache
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_685_710.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_685_710.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_649_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_649_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_696.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_696.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10951_11351.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10951_11351.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2596_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2596_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_648_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_648_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2734_2837.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2734_2837.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2736_2836.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2736_2836.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_688.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_688.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2595_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2595_2647.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_647_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_647_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_704.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2596_2646.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2596_2646.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_41_42.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_41_42.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2718_2769.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2718_2769.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_41_43.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_41_43.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_677_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_677_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2592_2646.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2592_2646.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2594_2645.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2594_2645.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_16_41502_42356.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_16_41502_42356.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_676_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_676_691.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_649_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_649_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2717_2769.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2717_2769.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2595_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2595_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_708.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_708.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_649_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_649_664.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_17_82999_84672.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_17_82999_84672.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1367_1420.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1367_1420.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2595_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2595_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_686_712.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_686_712.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2719_2768.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2719_2768.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_650_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_650_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_16_41500_42357.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_16_41500_42357.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5475_5676.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5475_5676.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_695.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_695.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5477_5674.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5477_5674.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_710.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_710.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5472_5677.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5472_5677.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2595_2646.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2595_2646.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_694.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_711.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_711.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_707.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_650_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_650_661.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_650_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_650_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5474_5676.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5474_5676.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5471_5678.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5471_5678.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_695.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_695.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_649_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_649_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2735_2839.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2735_2839.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_708.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_708.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2738_2835.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2738_2835.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_707.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_647_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_647_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10951_11352.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10951_11352.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_40_43.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_40_43.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2738_2838.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2738_2838.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5472_5676.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5472_5676.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_648_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_648_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2716_2768.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2716_2768.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_17_82999_84673.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_17_82999_84673.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_693.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2595_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2595_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1366_1413.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1366_1413.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_706.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_706.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2735_2835.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2735_2835.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5187_5293.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5187_5293.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_691.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_647_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_647_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2596_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2596_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_39_39.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_39_39.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_650_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_650_663.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_649_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_649_660.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_649_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_649_664.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_647_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_647_661.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_650_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_650_664.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2735_2840.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2735_2840.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_647_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_647_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_161_165.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_161_165.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2593_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2593_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5476_5674.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5476_5674.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_39_42.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_39_42.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_694.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_675_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_675_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5477_5675.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5477_5675.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2734_2839.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2734_2839.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_703.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_703.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_650_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_650_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_648_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_648_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_16_43798_45405.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_16_43798_45405.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10950_11352.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10950_11352.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_40_42.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_40_42.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_647_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_647_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2593_2646.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2593_2646.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2736_2835.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2736_2835.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2734_2840.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2734_2840.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2739_2837.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2739_2837.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_706.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_706.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1367_1413.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1367_1413.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2595_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2595_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1369_1419.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1369_1419.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2717_2766.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2717_2766.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1371_1419.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1371_1419.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_708.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_708.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_709.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_709.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5477_5676.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5477_5676.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_646_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_646_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10948_11350.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10948_11350.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_685_708.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_685_708.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_42_40.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_42_40.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1371_1418.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1371_1418.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_710.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_710.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2592_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2592_2647.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_647_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_647_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_675_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_675_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2735_2838.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2735_2838.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_650_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_650_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2593_2645.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2593_2645.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5186_5293.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5186_5293.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2594_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2594_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_697.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_697.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_686_711.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_686_711.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_676_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_676_690.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_648_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_648_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_695.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_695.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_706.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_706.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_701.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_701.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5445_5564.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5445_5564.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_685_709.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_685_709.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21901_22704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21901_22704.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_700.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_700.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21899_22704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21899_22704.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_646_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_646_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_689.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2734_2835.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2734_2835.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_677_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_677_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10378_10591.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10378_10591.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_650_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_650_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_162_164.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_162_164.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1370_1419.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1370_1419.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2717_2768.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2717_2768.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_648_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_648_664.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_695.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_695.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2738_2839.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2738_2839.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_704.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1370_1420.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1370_1420.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2594_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2594_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5476_5677.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5476_5677.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_711.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_711.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2736_2839.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2736_2839.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_688.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_688.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5476_5676.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5476_5676.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_649_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_649_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_706.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_706.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_649_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_649_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2720_2767.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2720_2767.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2592_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2592_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21900_22704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21900_22704.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2595_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2595_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_712.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_712.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10379_10592.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10379_10592.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_16_41501_42356.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_16_41501_42356.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_17_82999_84674.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_17_82999_84674.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2737_2835.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2737_2835.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1367_1419.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1367_1419.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_694.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5471_5677.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5471_5677.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2716_2769.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2716_2769.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2594_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2594_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_649_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_649_662.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_12_2594_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_12_2594_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10949_11350.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10949_11350.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10949_11351.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10949_11351.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_712.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_712.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2718_2766.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2718_2766.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_706.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_706.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_711.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_711.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_707.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_694.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5474_5674.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5474_5674.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_677_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_677_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_695.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_695.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5446_5563.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5446_5563.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_706.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_706.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_42_42.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_42_42.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2739_2835.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2739_2835.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_708.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_708.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_648_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_648_662.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_650_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_650_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_712.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_712.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2594_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2594_2649.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_647_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_647_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1360_1387.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1360_1387.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2717_2767.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2717_2767.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_160_164.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_160_164.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2594_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2594_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2737_2837.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2737_2837.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_689.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_648_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_648_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2719_2766.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2719_2766.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2593_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2593_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2592_2645.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2592_2645.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_650_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_650_664.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_691.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2596_2645.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2596_2645.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_162_165.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_162_165.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_648_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_648_664.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1359_1387.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1359_1387.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5474_5677.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5474_5677.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_686_710.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_686_710.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_700.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_700.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1370_1417.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1370_1417.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_41_39.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_41_39.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_675_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_675_691.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_648_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_648_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2720_2769.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2720_2769.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_646_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_646_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_648_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_648_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_40_39.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_40_39.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5187_5292.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5187_5292.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_694.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_704.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10378_10590.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10378_10590.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2592_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2592_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2594_2646.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2594_2646.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_705.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_705.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2593_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2593_2649.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_646_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_646_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2592_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2592_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_40_41.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_40_41.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_39_43.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_39_43.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21900_22703.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21900_22703.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_677_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_677_689.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_686_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_686_707.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2720_2766.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2720_2766.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2595_2645.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2595_2645.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2593_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2593_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_705.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_705.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_646_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_646_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1368_1418.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1368_1418.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_700.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_700.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2719_2767.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2719_2767.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2738_2840.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2738_2840.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_710.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_710.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_41_41.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_41_41.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_17_83000_84674.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_17_83000_84674.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2593_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2593_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_675_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_675_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_689.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1367_1415.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1367_1415.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2739_2840.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2739_2840.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2716_2767.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2716_2767.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2738_2837.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2738_2837.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_648_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_648_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_16_41501_42357.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_16_41501_42357.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5472_5678.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5472_5678.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1367_1418.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1367_1418.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5473_5676.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5473_5676.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_707.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21899_22702.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21899_22702.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10948_11351.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10948_11351.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_675_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_675_694.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_696.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_696.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10950_11351.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10950_11351.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_646_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_646_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2739_2839.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2739_2839.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_12_2592_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_12_2592_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21898_22704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21898_22704.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_12_2593_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_12_2593_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_160_166.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_160_166.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_689.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_696.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_696.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1368_1419.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1368_1419.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2734_2838.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2734_2838.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_711.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_711.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_17_83000_84673.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_17_83000_84673.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_712.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_712.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_41_40.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_41_40.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_646_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_646_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_690.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_690.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_697.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_697.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1368_1420.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1368_1420.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2594_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2594_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2737_2840.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2737_2840.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_12_2593_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_12_2593_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_163_164.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_163_164.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2739_2838.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2739_2838.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_688.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_688.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_676_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_676_689.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2592_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2592_2648.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_649_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_649_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_704.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1371_1417.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1371_1417.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2718_2767.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2718_2767.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_689.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5447_5564.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5447_5564.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5186_5291.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5186_5291.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5477_5677.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5477_5677.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_691.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_705.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_705.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_709.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_709.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1359_1386.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1359_1386.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_650_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_650_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_710.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_710.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21901_22703.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21901_22703.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2736_2840.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2736_2840.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_160_165.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_160_165.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5186_5292.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5186_5292.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1368_1417.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1368_1417.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_712.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_712.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_648_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_648_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1358_1387.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1358_1387.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_691.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5446_5564.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5446_5564.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_650_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_650_664.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1370_1418.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1370_1418.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_161_164.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_161_164.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_39_40.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_39_40.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_704.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2738_2836.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2738_2836.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_709.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_709.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1367_1417.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1367_1417.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_691.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2592_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2592_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2719_2769.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2719_2769.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_161_166.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_161_166.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_676_693.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_676_693.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5475_5674.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5475_5674.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_705.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_705.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2596_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2596_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2734_2836.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2734_2836.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_691.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_39_41.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_39_41.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_675_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_675_689.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_8_162_166.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_8_162_166.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5475_5677.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5475_5677.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2735_2837.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2735_2837.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5473_5674.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5473_5674.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_685_712.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_685_712.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_700.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_700.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_650_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_650_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2593_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2593_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_686_709.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_686_709.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_694.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2595_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2595_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2737_2836.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2737_2836.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1365_1413.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1365_1413.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_10_647_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_10_647_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_685_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_685_707.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_705.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_705.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1369_1418.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1369_1418.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_703.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_703.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1360_1386.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1360_1386.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_677_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_677_694.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_647_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_647_662.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2594_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2594_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2720_2768.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2720_2768.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_649_664.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_649_664.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2594_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2594_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_649_661.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_649_661.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2737_2839.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2737_2839.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5476_5675.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5476_5675.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2596_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2596_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_685_711.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_685_711.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_16_41502_42357.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_16_41502_42357.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1364_1413.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1364_1413.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1369_1417.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1369_1417.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_686_708.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_686_708.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_40_40.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_40_40.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5473_5677.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5473_5677.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10948_11352.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10948_11352.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2596_2649.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2596_2649.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2592_2647.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2592_2647.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2592_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2592_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2735_2836.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2735_2836.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_678_696.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_678_696.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_697.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_697.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_684_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_684_707.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10378_10592.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10378_10592.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2737_2838.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2737_2838.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21898_22702.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21898_22702.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_648_662.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_648_662.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5475_5675.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5475_5675.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2736_2838.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2736_2838.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_676_694.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_676_694.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2593_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2593_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2716_2766.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2716_2766.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_10_649_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_10_649_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_704.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_704.png
+# Copy /home/nofreya/CarParking/cache/36a36e5848_12_2593_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/36a36e5848_12_2593_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2718_2768.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2718_2768.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_15_21899_22703.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_15_21899_22703.png
+# Copy /home/nofreya/CarParking/cache/6f21bd4c56_12_2594_2648.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6f21bd4c56_12_2594_2648.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_676_692.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_676_692.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_679_697.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_679_697.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2595_2650.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2595_2650.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_11_1369_1420.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_11_1369_1420.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_677_691.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_677_691.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2736_2837.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2736_2837.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_6_42_41.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_6_42_41.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_683_707.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_683_707.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_681_696.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_681_696.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5473_5675.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5473_5675.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_709.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_709.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_680_689.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_680_689.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10379_10591.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10379_10591.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5447_5563.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5447_5563.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_14_10949_11352.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_14_10949_11352.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_646_660.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_646_660.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_649_663.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_649_663.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_12_2739_2836.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_12_2739_2836.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_10_682_698.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_10_682_698.png
+# Copy /home/nofreya/CarParking/cache/6d86c35b5f_13_5474_5675.png to /home/nofreya/CarParking/.buildozer/android/app/cache/6d86c35b5f_13_5474_5675.png
+# copy /home/nofreya/CarParking/.buildozer/applibs to /home/nofreya/CarParking/.buildozer/android/app/_applibs
+# Copy /usr/local/lib/python3.10/dist-packages/buildozer-1.5.1.dev0-py3.10.egg/buildozer/sitecustomize.py to /home/nofreya/CarParking/.buildozer/android/app/sitecustomize.py
+# Package the application
+# project.properties updated
+# Run '/usr/bin/python3 -m pythonforandroid.toolchain apk --bootstrap sdl2 --dist_name HrnyCats.CarParking --name CarParking --version 0.1 --package hrnycats.carspark.hrnycats.carparking --minsdk 21 --ndk-api 21 --private /home/nofreya/CarParking/.buildozer/android/app --android-entrypoint org.kivy.android.PythonActivity --android-apptheme @android:style/Theme.NoTitleBar --orientation portrait --window --enable-androidx --copy-libs --arch arm64-v8a --arch armeabi-v7a --color=always --storage-dir=/home/nofreya/CarParking/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a --ndk-api=21 --ignore-setup-py --debug' ...
+# Cwd /home/nofreya/CarParking/.buildozer/android/platform/python-for-android
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/MainScreen.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/main backup.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/Singleton.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/ParkMarker.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/MarkerPopupMenu.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/test.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/ParksMapView.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/PaymentScreen.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/TextInputField.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/sitecustomize.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/main.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/ReservationScreen.py'...
+Compiling '/home/nofreya/CarParking/.buildozer/android/app/BottomSheet.py'...
+No setup.py/pyproject.toml used, copying full private data into .apk.
+Applying Java source code patches...
+Applying patch: src/patches/SDLActivity.java.patch
+Warning: failed to apply patch (exit code 1), assuming it is already applied:  src/patches/SDLActivity.java.patch
+# Copy /home/nofreya/CarParking/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/dists/HrnyCats.CarParking/build/outputs/apk/debug/HrnyCats.CarParking-debug.apk to /home/nofreya/CarParking/bin/HrnyCats.CarParking-0.1-arm64-v8a_armeabi-v7a-debug.apk
+# Android packaging done!
+# APK HrnyCats.CarParking-0.1-arm64-v8a_armeabi-v7a-debug.apk available in the bin directory
+# Run '/home/nofreya/.buildozer/android/platform/android-sdk/platform-tools/adb devices' ...
+# Cwd None
+List of devices attached
+
+# Application pushed.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
+# Waiting for application to start.
